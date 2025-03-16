@@ -23,6 +23,7 @@ Although this would work, using AAA would be the preferred method.
 event manager applet DisableReload
  event cli pattern "reload" sync no skip yes occurs 1
  action 1.0 syslog msg "$_cli_msg has been disabled."
+event manager run DisableReload
 
 Instead of looking for a pattern in syslog, this time we’re waiting for a
 pattern entered onto the CLI. Let’s break down the options on that event real quick
@@ -113,7 +114,7 @@ event manager applet auto-delete-flash-and-reboot
  action 1.2 cli command "erase startup-config"
  action 2.0 syslog msg "Deleting flash and rebooting the device..."
  action 3.0 reload
-
+event manager run auto-delete-flash-and-reboot
 
 To install the script, copy and paste the above configuration 
 into the device's configuration mode and then enter the following command:
